@@ -1,0 +1,14 @@
+<form ng-submit="vm.remember()" role="form" class="form-horizontal" >
+    <div class="well">
+        <h4>Por favor digite la cuenta de correo con la que realizó el registro en iJobs</h4>
+    </p>
+    <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
+        <input type="email" ng-disabled="vm.sended" required ng-model="vm.email" class="form-control" placeholder="Correo electrónico">
+        <br>
+        <input type="submit" ng-disabled="vm.sended" class="btn btn-success" value="Confirmar">
+        <input type="button" class="btn btn-default" value="Cancelar" ng-click="vm.cancel()">
+        <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">El email es obligatorio</span>
+    </div>
+</form>
+
+<div class="{{vm.msg.className}}">{{vm.msg.content}}</div>

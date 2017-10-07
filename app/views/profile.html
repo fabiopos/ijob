@@ -1,0 +1,152 @@
+<div class="userInfo">
+  <div class="col-lg-3">
+    <img ng-if="vm.dataLoading" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA=="
+    />
+    <img ng-if="!vm.dataLoading" class="avatar-perfil" src="images/avatar.png" width="150">
+  </div>
+
+  <div class="col-lg-9">
+    <fieldset>
+      <legend>Datos personales</legend>
+      <span ng-show="vm.dataLoading">Cargando información...</span>
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Fecha de nacimiento</label>
+        <div class="col-sm-6">
+          <input class="form-control" type="date" ng-model="vm.user.nacimiento">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Genero {{vm.user.genero}}</label>
+        <div class="col-sm-8">
+          <select class="form-control" name="genero" ng-model="vm.user.genero" 
+          ng-options="i.codigo as (i.nombre) for i in vm.Genero">                         
+                            </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Correo Electrónico</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="email" disabled placeholder="correo electrónico" ng-model="vm.user.correo">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Teléfono</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="text" placeholder="Teléfono" ng-model="vm.user.telefono">
+        </div>
+      </div>
+
+    </fieldset>
+
+    <fieldset>
+      <legend>Servicios</legend>
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Servicios</label>
+        <div class="col-sm-8">
+          <select class="form-control">
+                    <option value="services">"</option>
+                </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Años de experiencia</label>
+        <div class="col-sm-8">
+          <input class="form-control" type="number" placeholder="años de experiencia" ng-model="vm.user.experiencia">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">He tomado estos cursos</label>
+        <div class="col-sm-8">
+          <textarea class="form-control" name="cursos" cols="23"></textarea>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Mi nivel educativo</label>
+        <div class="col-sm-8">
+          <select class="form-control" name="educativo">
+                          <option value="nivel">Primaria</option>
+                          <option value="nivel">Bachiller</option>
+                          <option value="nivel">Técnico</option>
+                          <option value="nivel">Tecnólogo</option>
+                          <option value="nivel">Profesional</option>
+                          <option value="nivel">Especialización</option>
+                          <option value="nivel">Maestría</option>
+                          <option value="nivel">Doctorado</option>
+                      </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Mi trabajo consiste en</label>
+        <div class="col-sm-8">
+          <select class="form-control" name="educativo">                           
+                        </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">¿Estoy disponible por Whatsapp?</label>
+        <div class="col-sm-8">
+          <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Sí
+                </label>
+          <label class="radio-inline">
+                  <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> No
+                </label>
+
+        </div>
+      </div>
+
+    </fieldset>
+
+    <fieldset>
+      <legend>Ubicación</legend>
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Departamento</label>
+        <div class="col-sm-6">
+          <select class="form-control"></select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Ciudad</label>
+        <div class="col-sm-6">
+          <select class="form-control"></select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Dirección</label>
+        <div class="col-sm-6">
+          <input type="text" class="form-control" placeholder="Dirección de domicilio">
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="inputEmail3" class="col-sm-4 control-label">Pueden contarcarme vía</label>
+        <div class="col-sm-6">
+          <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox1" value="option1"> Correo
+                      </label>
+          <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox2" value="option2"> Teléfono
+                      </label>
+          <label class="checkbox-inline">
+                        <input type="checkbox" id="inlineCheckbox3" value="option3"> WhatsApp
+                      </label>
+        </div>
+      </div>
+    </fieldset>
+    <hr>
+  </div>
+  <div class="col-lg-offset-9">
+    <input type="submit" value="Guardar" class="btn btn-success">
+    <a href="#/" class="btn btn-default">Cancelar</a>
+  </div>
+</div>
+</div>
