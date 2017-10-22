@@ -53,14 +53,11 @@ angular
         controller: 'SearchCtrl',
         controllerAs: 'vm'
       })
-<<<<<<< HEAD
       .when('/contacts', {
         templateUrl: 'views/contacts.html',
         controller: 'ContactsCtrl',
         controllerAs: 'vm'
       })
-=======
->>>>>>> 327534da7cc82fe1eabfaa32a2eeb984908e1c7d
       .otherwise({
         redirectTo: '/'
       });

@@ -86,10 +86,7 @@ angular.module('ijobApp')
       return since;
     };
 
-<<<<<<< HEAD
    
-=======
->>>>>>> 327534da7cc82fe1eabfaa32a2eeb984908e1c7d
     var mapResult = function (response) {
       if (response.data.codigo) {
         if (response.data.codigo === 204) vm.searchResult = response.data.mensaje;
@@ -98,25 +95,16 @@ angular.module('ijobApp')
         angular.forEach(vm.jobs, function (job, key) {
           job.since = sinceFormat(job.creado);
           job.creadoEn = moment(job.creado).format('YYYY-MM-DD hh:mm a');
-<<<<<<< HEAD
           if (job._imagen) {
             job.srcImage = UserService.GetUserImage(job._imagen);
           } else {
             job.srcImage = '/images/avatar_male.png';
-=======
-          if(job._imagen){
-              job.srcImage = UserService.GetUserImage(job._imagen);
-          }
-          else{
-            job.srcImage =  '/images/avatar_male.png';
->>>>>>> 327534da7cc82fe1eabfaa32a2eeb984908e1c7d
           }
         });
       }
 
     };
     var getUbicaciones = function () {
-<<<<<<< HEAD
       CommonService.getUbicaciones().then(function (response) {
           vm.ubicaciones = response.data;
         },
@@ -225,54 +213,4 @@ angular.module('ijobApp')
     getOcupaciones();
     getEstados();
     getSectores();
-=======
-        CommonService.getUbicaciones().then(function (response) {
-            vm.ubicaciones = response.data;
-          },
-          function (response) {
-            console.log('error ubicaciones =>', response)
-          });
-      };
-    
-      var getSectores = function () {
-        CommonService.getSectores().then(function (response) {
-            vm.sectores = response.data;
-          },
-          function (response) {
-            console.log('error sectores =>', response)
-          });
-      };
-    
-      var getEscolaridad = function () {
-        CommonService.getEscolaridad().then(function (response) {
-            vm.escolaridad = response.data;
-          },
-          function (response) {
-            console.log('error escolaridad =>', response)
-          });
-      };
-    
-      var getEstados = function () {
-        CommonService.getEstados().then(function (response) {
-            vm.estados = response.data; // codigo & nombre
-          },
-          function (response) {
-            console.log('error getEstados =>', response)
-          });
-      };
-    
-      var getOcupaciones = function () {
-        CommonService.getOcupaciones().then(function (response) {
-            vm.ocupaciones = response.data;
-          },
-          function (response) {
-            console.log('error escolaridad =>', response)
-          });
-      };
-      getUbicaciones();
-      getEscolaridad();
-      getOcupaciones();
-      getEstados();
-      getSectores();
->>>>>>> 327534da7cc82fe1eabfaa32a2eeb984908e1c7d
   });

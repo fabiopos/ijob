@@ -1,15 +1,10 @@
-<<<<<<< HEAD
 <p>
   Buscar</p>
-=======
-<p>Buscar</p>
->>>>>>> 327534da7cc82fe1eabfaa32a2eeb984908e1c7d
 
 <div class="input-group">
   <input type="text" class="form-control" placeholder="Search for...">
   <span class="input-group-btn">
       <button class="btn btn-default" ng-click="vm.searchJobs()" type="button">Buscar</button>
-<<<<<<< HEAD
       <button class="btn btn-default" ng-click="vm.adSearch()" type="button">Busqueda avanzada >></button>
       <button class="btn btn-default" ng-click="vm.searchGeografica()" type="button">Busqueda geográfica!</button>
     </span>
@@ -32,12 +27,6 @@
   <hr>
   <div id="map" ></div>
 </div>
-=======
-      <button class="btn btn-default" ng-click="vm.advanced = !vm.advanced" type="button">Busqueda avanzada >></button>
-    </span>
-</div>
-<br>
->>>>>>> 327534da7cc82fe1eabfaa32a2eeb984908e1c7d
 <form class="form" role="form" ng-submit="vm.advancedSearch()" ng-if="vm.advanced">
   <div>
 
@@ -85,7 +74,6 @@
                 <input type="radio" name="calificacion" ng-value="2" ng-model="vm.search.calificacion"> 2
               </label>
 
-<<<<<<< HEAD
         <label class="radio-inline">
                   <input type="radio" name="calificacion"  ng-value="3" ng-model="vm.search.calificacion"> 3
                 </label>
@@ -93,15 +81,6 @@
                   <input type="radio" name="calificacion" ng-value="4" ng-model="vm.search.calificacion"> 4
                 </label>
         <label class="radio-inline">
-=======
-              <label class="radio-inline">
-                  <input type="radio" name="calificacion"  ng-value="3" ng-model="vm.search.calificacion"> 3
-                </label>
-          <label class="radio-inline">            
-                  <input type="radio" name="calificacion" ng-value="4" ng-model="vm.search.calificacion"> 4
-                </label>
-                <label class="radio-inline">
->>>>>>> 327534da7cc82fe1eabfaa32a2eeb984908e1c7d
                     <input type="radio" name="calificacion" ng-value="5" ng-model="vm.search.calificacion"> 5
                   </label>
       </div>
@@ -118,7 +97,6 @@
     </div>
     <div class="row">
       <div class="col-lg-12 text-right">
-<<<<<<< HEAD
 
         <input type="submit" value="Aceptar" class="btn btn-success" ng-disabled="vm.dataLoading">
         <a ng-click="vm.advanced = false" class="btn btn-default" ng-disabled="vm.dataLoading">Cancelar</a><br>
@@ -127,27 +105,12 @@
     </div>
     <br>
 
-=======
-       
-        <input type="submit" value="Aceptar" class="btn btn-success" ng-disabled="vm.dataLoading">
-        <a ng-click="vm.advanced = false" class="btn btn-default" ng-disabled="vm.dataLoading">Cancelar</a><br>
-       
-      </div>
-    </div>
-    <br>
-  
->>>>>>> 327534da7cc82fe1eabfaa32a2eeb984908e1c7d
   </div>
 </form>
 
 <div class="row text-left">
-<<<<<<< HEAD
   <p><span class="text-danger" ng-if="vm.searchResult">{{vm.searchResult}}</span></p>
   <p><i><span ng-if="vm.jobs.length > 0">Total resultados {{vm.jobs.length}}</span></i></p>
-=======
-    <p><span class="text-danger" ng-if="vm.searchResult">{{vm.searchResult}}</span></p>
-    <p><i><span ng-if="vm.jobs.length > 0">Total resultados {{vm.jobs.length}}</span></i></p>
->>>>>>> 327534da7cc82fe1eabfaa32a2eeb984908e1c7d
 </div>
 <div class="jobs-container">
   <div class="job-item" ng-repeat="job in vm.jobs">
@@ -277,17 +240,8 @@
 
 
       </div>
-
-
-
-
       <i class="pull-right">Creado en {{job.creadoEn}}</i>
-
-
-
     </div>
     <hr>
-
-
   </div>
 </div>
