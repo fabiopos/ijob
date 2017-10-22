@@ -17,8 +17,7 @@ angular.module('ijobApp')
             lastName: localStorage.getItem("apellidos"),
             id: localStorage.getItem("id"),
             token:  localStorage.getItem("token")
-        };
-        console.log(localStorage.getItem("correo"))
+        };        
     }
   
     

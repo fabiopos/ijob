@@ -3,3 +3,10 @@
     padding: 10px;
     border: 1px solid gray;
 }
+[hidden]{
+    display: none !important;
+}
+.userImage:hover{
+    cursor: pointer;
+
+}

@@ -1,0 +1,90 @@
+<div>
+
+  <h3>Contactos</h3>
+  <!-- Nav tabs -->
+  <ul class="nav nav-tabs" role="tablist" id="myTabs">
+    <li role="presentation" class="active">
+      <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Solicitudes Enviadas ({{vm.contacts.pendingForAnswer.length}})</a>
+    </li>
+    <li role="presentation">
+      <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Solicitudes recibidas ({{vm.contacts.pendingToAnswer.length}})</a>
+    </li>
+    <li role="presentation">
+      <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Lista de Contactos ({{vm.contacts.active.length}})</a>
+    </li>
+    <li role="presentation">
+      <a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">Hacer solicitud</a>
+    </li>
+  </ul>
+
+
+  <!-- Tab panes -->
+  <div class="tab-content">
+    <div role="tabpanel" class="tab-pane active" id="home">
+      <br>
+      <!-- <button ng-click="vm.getPendingContacts(1)">Enviadas</button>
+      <button ng-click="vm.getPendingContacts(2)">Recibidas</button> -->
+
+      <h4>Enviadas</h4>
+      <ul>
+        <li ng-repeat="enviada in vm.contacts.pendingForAnswer">{{enviada}}</li>
+      </ul>
+
+    </div>
+    <div role="tabpanel" class="tab-pane" id="profile">
+      <!-- <button ng-click="vm.getActiveContacts()">Refresh</button> -->
+      <h4>Activos</h4>
+      <ul>
+        <li ng-repeat="enviada in vm.contacts.active">{{enviada}}</li>
+      </ul>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="messages">
+
+      <form class="form-horizontal" ng-submit="vm.doRequest()">
+        <legend>Nueva solicitud</legend>
+        <div class="form-group">
+          <label>User solicita</label>
+          <br>
+          <input type="text" placeholder="usuario solicita" ng-disabled="vm.idUser" ng-model="vm.idUser">
+        </div>
+        <div class="form-group">
+          <label>User destino</label>
+          <br>
+          <input type="text" placeholder="usuario solicita" ng-model="vm.idUserTarget">
+        </div>
+
+        <div class="form-group">
+          <input type="submit" value="Aceptar" class="btn btn-info">
+        </div>
+      </form>
+
+      <div>{{vm.requestResult}}</div>
+    </div>
+    <div role="tabpanel" class="tab-pane" id="settings">
+
+      <h4>Recibidas</h4>
+      <ul>
+        <li ng-repeat="request in vm.contacts.pendingToAnswer">{{request}}
+          <div>
+            <p>
+                <a class="btn btn-link" ng-click="vm.accept(request)">aceptar</a> | <a class="btn btn-link" ng-click="vm.reject(request)">rechazar</a>
+            </p>
+          </div>
+        </li>
+      </ul>
+
+      <div class="alert alert-{{vm.putResult.status}}" role="alert">{{vm.putResult.message}}</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('#myTabs a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+  });
+
+</script>

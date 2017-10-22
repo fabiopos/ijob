@@ -32,6 +32,26 @@ var CommonService = function ($http)  {
     return $http.get(uri+ '/ubicaciones/');
   }
 
+  service.getSectores = function(){
+    return $http.get(uri+ '/sectores/');
+  }
+
+  service.getOcupaciones = function(){
+    return $http.get(uri+ '/ocupaciones/');
+  }
+
+  service.getEscolaridad = function(){
+    return $http.get(uri+ '/usuario-escolaridad/');
+  }
+
+  service.getRoles = function(){
+    return $http.get(uri+ '/usuario-roles/');
+  }
+
+  service.getEstados = function(){
+    return $http.get(uri+ '/usuario-estados/');
+  }
+
   return service;
 };
 

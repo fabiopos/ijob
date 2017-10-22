@@ -19,10 +19,11 @@ angular.module('ijobApp')
     }
     
     var handleSuccess = function(response){
-        console.log('sucess =>', response);}
+        console.log('sucess =>', response);
         vm.sended = true;
         vm.msg.content = response.data.mensaje;
         vm.msg.className = 'text-success';
+    };
 
 
     vm.remember = function(){

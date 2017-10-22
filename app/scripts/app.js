@@ -18,7 +18,8 @@ angular
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'ngRoute'
+    'ngRoute',
+    'ngFileUpload'
   ])
   .config(function ($routeProvider) {
     $routeProvider
@@ -45,6 +46,16 @@ angular
       .when('/remember', {
         templateUrl: 'views/remember.html',
         controller: 'RememberCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/search', {
+        templateUrl: 'views/search.html',
+        controller: 'SearchCtrl',
+        controllerAs: 'vm'
+      })
+      .when('/contacts', {
+        templateUrl: 'views/contacts.html',
+        controller: 'ContactsCtrl',
         controllerAs: 'vm'
       })
       .otherwise({
