@@ -8,37 +8,38 @@
  * Controller of the ijobApp
  */
 angular.module('ijobApp')
-  .controller('SearchCtrl', function (SearchService, UserService, CommonService) {
+  .controller('SearchCtrl', function (SearchService, UserService, CommonService, ContactsService) {
     var vm = this;
-    var id = localStorage.getItem('id');
+    var id = localStorage.getItem('id');    
+    vm.idUser = id;
+    vm.currentPage = 1;
     vm.search = {};
     vm.searchResult = null;
     vm.advanced = false;
-<<<<<<< HEAD
     vm.geografica = false;
-=======
->>>>>>> 327534da7cc82fe1eabfaa32a2eeb984908e1c7d
     vm.ubicaciones = [];
     vm.escolaridad = [];
     vm.ocupaciones = [];
     vm.estados = [];
     vm.sectores = [];
     vm.jobs = [];
+    vm.isDoingRequest = false;
+    vm.requestText = 'Hacer solicitud';
     var simpleSearch = function () {
-<<<<<<< HEAD
       vm.advanced = false;
       vm.searchResult = '';
       vm.jobs = [];
-=======
-        vm.advanced = false;
-        vm.searchResult = '';
-        vm.jobs = [];
->>>>>>> 327534da7cc82fe1eabfaa32a2eeb984908e1c7d
       SearchService.search().then(function (response) {
+        console.log('response =>', response);
+        
         mapResult(response);
       })
     };
+    vm.changePage = function(page){
+      vm.currentPage = page;
+      advancedSearch();
 
+    };
     var advancedSearch = function () {
       vm.advanced = true;
       vm.searchResult = '';
@@ -50,7 +51,7 @@ angular.module('ijobApp')
         calificacion: vm.search.calificacion,
         jornada: "",
         horario: "",
-        pagina: 1
+        pagina: vm.currentPage
       };
 
       SearchService.adSearch(id, payload).then(function (response) {
@@ -61,15 +62,31 @@ angular.module('ijobApp')
 
     };
     vm.searchJobs = simpleSearch;
-    vm.advancedSearch = advancedSearch;
-<<<<<<< HEAD
+    vm.advancedSearch = function(){
+      vm.currentPage = 1;
+      advancedSearch();
+    };
     vm.advancedSearchInit = function () {
       vm.advanced = true;
-=======
-    vm.advancedSearchInit = function(){
-        vm.advanced = true;
->>>>>>> 327534da7cc82fe1eabfaa32a2eeb984908e1c7d
     };
+
+    vm.doRequest = function(user){
+      vm.requestResult = '';
+      var payload = { idUsuarioSolicita: vm.idUser, idUsuarioRecibe: user._id };
+      vm.requestText = 'Por favor espere...'
+      user.isDoingRequest = true;
+      ContactsService.postContact(id, payload ).then(function(response){
+          console.log(response);
+          vm.requestResult = response.data;
+          vm.isDoingRequest = false;
+          user.requestText = 'Solicitud realizada'
+      }, function(response){
+          console.log(response);
+          vm.requestResult = response.data;
+          vm.isDoingRequest = false;
+          user.requestText = response.data.error;
+      })
+  };
     var sinceFormat = function (creado) {
       var a = moment(creado);
       var days = a.diff(moment(), 'days') * -1;
@@ -95,6 +112,7 @@ angular.module('ijobApp')
         angular.forEach(vm.jobs, function (job, key) {
           job.since = sinceFormat(job.creado);
           job.creadoEn = moment(job.creado).format('YYYY-MM-DD hh:mm a');
+          job.requestText = 'Hacer solicitud';
           if (job._imagen) {
             job.srcImage = UserService.GetUserImage(job._imagen);
           } else {
@@ -149,7 +167,7 @@ angular.module('ijobApp')
         });
     };
     var initMap = function initMap(position) {
-      console.log('position',position);
+      console.log('position',position);     
       var uluru = {
         lat: position.coords.latitude,
         lng: position.coords.longitude
@@ -164,19 +182,17 @@ angular.module('ijobApp')
        });
     };
     var getLocation = function(){
-      if (navigator.geolocation) {
+      if (false) {
           console.log('navigator', navigator, navigator.geolocation);        
           navigator.geolocation.watchPosition(showPosition, function(err){console.log('error watch position',err)});
       } else {          
-          showPosition({ latitude: 4.6923, longitude: -74.1063661});
+          showPosition({ coords: {latitude: 4.6923, longitude: -74.1063661} } );
       }
     };
     var showPosition = function(position){
-      console.log('position', position);
-      
-      vm.position = position;
+      console.log('position', position);      
+      vm.position = position;   
       initMap(position);
-     
     };
     vm.searchGeografica = function(){
         vm.geografica = true;

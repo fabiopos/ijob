@@ -4,28 +4,35 @@
 <div class="input-group">
   <input type="text" class="form-control" placeholder="Search for...">
   <span class="input-group-btn">
-      <button class="btn btn-default" ng-click="vm.searchJobs()" type="button">Buscar</button>
-      <button class="btn btn-default" ng-click="vm.adSearch()" type="button">Busqueda avanzada >></button>
-      <button class="btn btn-default" ng-click="vm.searchGeografica()" type="button">Busqueda geográfica!</button>
-    </span>
+    <button class="btn btn-default" ng-click="vm.searchJobs()" type="button">Buscar</button>
+    <button class="btn btn-default" ng-click="vm.adSearch()" type="button">Busqueda avanzada >></button>
+    <button class="btn btn-default" ng-click="vm.searchGeografica()" type="button">Busqueda geográfica!</button>
+  </span>
 </div>
 <br>
 <div ng-if="vm.geografica">
+  <div class="form-group">
+    <label for="inputEmail3" class="col-sm-4 control-label">Categoría</label>
+    <div class="col-sm-8">
+      <select class="form-control" ng-model="vm.search.idSector" ng-options="i._id as (i.nombre) for i in vm.sectores">
+      </select>
+    </div>
+  </div>
 
   <div class="form-group">
     <label for="inputEmail3" class="col-sm-4 control-label">Ocupación</label>
     <div class="col-sm-8">
-      <select class="form-control" ng-model="vm.search.geoOcupacion" ng-options="i._id as (i.nombre) for i in vm.ocupaciones | filter:{_sector:vm.search.idSector }">                           
-                                  </select>
-                                  <p>
-                                  <input type="button" value="Aceptar" class="btn btn-success" ng-disabled="vm.dataLoading" ng-click="vm.geoSearch()">
-                                </p>
+      <select class="form-control" ng-model="vm.search.geoOcupacion" ng-options="i._id as (i.nombre) for i in vm.ocupaciones | filter:{_sector:vm.search.idSector }">
+      </select>
+      <p>
+        <input type="button" value="Aceptar" class="btn btn-success" ng-disabled="vm.dataLoading" ng-click="vm.geoSearch()">
+      </p>
 
-                                <div>{{vm.geoSearchResult}}</div>
+      <div>{{vm.geoSearchResult}}</div>
     </div>
   </div>
   <hr>
-  <div id="map" ></div>
+  <div id="map"></div>
 </div>
 <form class="form" role="form" ng-submit="vm.advancedSearch()" ng-if="vm.advanced">
   <div>
@@ -33,16 +40,16 @@
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-4 control-label">Categoría</label>
       <div class="col-sm-8">
-        <select class="form-control" ng-model="vm.search.idSector" ng-options="i._id as (i.nombre) for i in vm.sectores">                           
-                                  </select>
+        <select class="form-control" ng-model="vm.search.idSector" ng-options="i._id as (i.nombre) for i in vm.sectores">
+        </select>
       </div>
     </div>
 
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-4 control-label">Ocupación</label>
       <div class="col-sm-8">
-        <select class="form-control" ng-model="vm.search.idOcupacion" ng-options="i._id as (i.nombre) for i in vm.ocupaciones | filter:{_sector:vm.search.idSector }">                           
-                                    </select>
+        <select class="form-control" ng-model="vm.search.idOcupacion" ng-options="i._id as (i.nombre) for i in vm.ocupaciones | filter:{_sector:vm.search.idSector }">
+        </select>
       </div>
     </div>
 
@@ -51,16 +58,16 @@
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-4 control-label">Departamento</label>
       <div class="col-sm-6">
-        <select class="form-control" ng-model="vm.search.departamento" ng-options="i.departamento as (i.departamento) for i in vm.ubicaciones">                           
-                        </select>
+        <select class="form-control" ng-model="vm.search.departamento" ng-options="i.departamento as (i.departamento) for i in vm.ubicaciones">
+        </select>
       </div>
     </div>
 
     <div class="form-group">
       <label for="inputEmail3" class="col-sm-4 control-label">Ciudad</label>
       <div class="col-sm-6">
-        <select class="form-control" ng-model="vm.search.ciudad" ng-options="i._id as (i.municipio) for i in vm.ubicaciones | filter:{ departamento: vm.search.departamento }">                           
-                        </select>
+        <select class="form-control" ng-model="vm.search.ciudad" ng-options="i._id as (i.municipio) for i in vm.ubicaciones | filter:{ departamento: vm.search.departamento }">
+        </select>
       </div>
     </div>
 
@@ -68,21 +75,21 @@
       <label for="inputEmail3" class="col-sm-4 control-label">Calificación</label>
       <div class="col-sm-6">
         <label class="radio-inline">
-                <input type="radio" name="calificacion"  ng-value="1" ng-model="vm.search.calificacion"> 1
-              </label>
+          <input type="radio" name="calificacion" ng-value="1" ng-model="vm.search.calificacion"> 1
+        </label>
         <label class="radio-inline">
-                <input type="radio" name="calificacion" ng-value="2" ng-model="vm.search.calificacion"> 2
-              </label>
+          <input type="radio" name="calificacion" ng-value="2" ng-model="vm.search.calificacion"> 2
+        </label>
 
         <label class="radio-inline">
-                  <input type="radio" name="calificacion"  ng-value="3" ng-model="vm.search.calificacion"> 3
-                </label>
-        <label class="radio-inline">            
-                  <input type="radio" name="calificacion" ng-value="4" ng-model="vm.search.calificacion"> 4
-                </label>
+          <input type="radio" name="calificacion" ng-value="3" ng-model="vm.search.calificacion"> 3
+        </label>
         <label class="radio-inline">
-                    <input type="radio" name="calificacion" ng-value="5" ng-model="vm.search.calificacion"> 5
-                  </label>
+          <input type="radio" name="calificacion" ng-value="4" ng-model="vm.search.calificacion"> 4
+        </label>
+        <label class="radio-inline">
+          <input type="radio" name="calificacion" ng-value="5" ng-model="vm.search.calificacion"> 5
+        </label>
       </div>
     </div>
 
@@ -99,7 +106,8 @@
       <div class="col-lg-12 text-right">
 
         <input type="submit" value="Aceptar" class="btn btn-success" ng-disabled="vm.dataLoading">
-        <a ng-click="vm.advanced = false" class="btn btn-default" ng-disabled="vm.dataLoading">Cancelar</a><br>
+        <a ng-click="vm.advanced = false" class="btn btn-default" ng-disabled="vm.dataLoading">Cancelar</a>
+        <br>
 
       </div>
     </div>
@@ -109,8 +117,14 @@
 </form>
 
 <div class="row text-left">
-  <p><span class="text-danger" ng-if="vm.searchResult">{{vm.searchResult}}</span></p>
-  <p><i><span ng-if="vm.jobs.length > 0">Total resultados {{vm.jobs.length}}</span></i></p>
+  <p>
+    <span class="text-danger" ng-if="vm.searchResult">{{vm.searchResult}}</span>
+  </p>
+  <p>
+    <i>
+      <span ng-if="vm.jobs.length > 0">Total resultados {{vm.jobs.length}}</span>
+    </i>
+  </p>
 </div>
 <div class="jobs-container">
   <div class="job-item" ng-repeat="job in vm.jobs">
@@ -235,7 +249,18 @@
               </div>
             </div>
 
+
           </div>
+
+          
+          <div class="row">
+              <div class="col-lg-4">
+                <strong></strong>
+              </div>
+              <div class="col-lg-8">
+                <a class="fsRequest" ng-disabled="job.isDoingRequest"  ng-click="vm.doRequest(job)" >{{job.requestText}}</a>
+              </div>
+            </div>
         </div>
 
 
@@ -245,3 +270,33 @@
     <hr>
   </div>
 </div>
+<nav aria-label="Page navigation" ng-if="vm.jobs.length > 0">
+    <ul class="pagination">
+      <li>
+        <a class="fsRequest" ng-click="vm.currentPage = vm.currentPage-1" aria-label="Previous">
+          <span aria-hidden="true">&laquo;</span>
+        </a>
+      </li>
+      <li  ng-class="{active: vm.currentPage == 1}"><a class="fsRequest"  ng-click="vm.changePage(1)">1</a></li>
+      <li  ng-class="{active: vm.currentPage == 2}"><a class="fsRequest" ng-click="vm.changePage(2)">2</a></li>
+      <li  ng-class="{active: vm.currentPage == 3}"><a class="fsRequest" ng-click="vm.changePage(3)">3</a></li>
+      <li  ng-class="{active: vm.currentPage == 4}"><a class="fsRequest" ng-click="vm.changePage(4)">4</a></li>
+      <li  ng-class="{active: vm.currentPage == 5}"><a class="fsRequest" ng-click="vm.changePage(5)">5</a></li>
+      <li  ng-class="{active: vm.currentPage == 6}"><a class="fsRequest"  ng-click="vm.changePage(6)">6</a></li>
+      <li  ng-class="{active: vm.currentPage == 7}"><a class="fsRequest" ng-click="vm.changePage(7)">7</a></li>
+      <li  ng-class="{active: vm.currentPage == 8}"><a class="fsRequest" ng-click="vm.changePage(8)">8</a></li>
+      <li  ng-class="{active: vm.currentPage == 9}"><a class="fsRequest" ng-click="vm.changePage(9)">9</a></li>
+      <li  ng-class="{active: vm.currentPage == 10}"><a class="fsRequest" ng-click="vm.changePage(10)">10</a></li>
+      <li>
+        <a class="fsRequest" ng-click="vm.currentPage = vm.currentPage-1" aria-label="Next">
+          <span aria-hidden="true">&raquo;</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+<script>
+  $('a.fsRequest').on('click', function (e) {
+    e.preventDefault()
+  })
+
+</script>

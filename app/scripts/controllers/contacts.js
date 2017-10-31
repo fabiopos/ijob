@@ -8,9 +8,10 @@
  * Controller of the ijobApp
  */
 angular.module('ijobApp')
-  .controller('ContactsCtrl', function (ContactsService, $location) {
+  .controller('ContactsCtrl', function (ContactsService, SearchService, UserService,  $location, $rootScope) {
     var vm = this;
-    // if (!$rootScope.user.id) $location.path('/')
+    if (!$rootScope.user.id) $location.path('/')
+    vm.jobs= [];
     var id = localStorage.getItem('id');
     vm.idUser = id;
     vm.contacts = { active :[], pendingForAnswer: [], pendingToAnswer: [] };
@@ -19,6 +20,31 @@ angular.module('ijobApp')
         var response = ContactsService.getActiveContacts(id)
                         .then(function(){}, function(){});
     };
+
+    var searchAllPersons = function(){
+        SearchService.search().then(function (response) {
+            mapResult(response);
+        });
+    };
+    var mapResult = function (response) {
+        if (response.data.codigo) {
+          if (response.data.codigo === 204) vm.searchResult = response.data.mensaje;
+        } else {
+          vm.jobs = response.data;
+          angular.forEach(vm.jobs, function (job, key) {
+            job.since = sinceFormat(job.creado);
+            job.creadoEn = moment(job.creado).format('YYYY-MM-DD hh:mm a');
+            if (job._imagen) {
+              job.srcImage = UserService.GetUserImage(job._imagen);
+            } else {
+              job.srcImage = '/images/avatar_male.png';
+            }
+          });
+        }
+  
+      };
+
+   
 
     vm.getPendingContacts = function(tipo){ 
         console.log('se enviará ..', tipo)
@@ -38,9 +64,20 @@ angular.module('ijobApp')
         ContactsService.getActiveContacts(id).then(function(response){     
             console.log('actives', response);                   
             vm.contacts.active = response.data;
+            mapImages(response.data);
         }, function(response){});
     };
-    
+    var mapImages = function(users){
+        angular.forEach(users, function (user, key) {
+            var realuser = UserService.GetById(user._usuarioRecibe._id).then(function(response){
+                console.log('finding real user => ', response);
+
+           });
+           
+
+        });
+       // UserService.GetById(response.data);
+    };
     vm.doRequest = function(){
         vm.requestResult = '';
         var payload = { idUsuarioSolicita: vm.idUser, idUsuarioRecibe: vm.idUserTarget };

@@ -24,19 +24,57 @@
       <br>
       <!-- <button ng-click="vm.getPendingContacts(1)">Enviadas</button>
       <button ng-click="vm.getPendingContacts(2)">Recibidas</button> -->
-
-      <h4>Enviadas</h4>
-      <ul>
-        <li ng-repeat="enviada in vm.contacts.pendingForAnswer">{{enviada}}</li>
-      </ul>
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default" ng-repeat="enviada in vm.contacts.pendingForAnswer">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a role="button" ng-if="enviada._usuarioRecibe" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                {{enviada._usuarioRecibe.nombre}} {{enviada._usuarioRecibe.apellidos}}
+              </a>
+              <span ng-if="!enviada._usuarioRecibe" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                  Nombre de usuario desconocido
+              </span>              
+              <i class="pull-right">enviado en: {{enviada.fecha}}</i>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+              {{enviada.observaciones}}
+            </div>
+          </div>
+        </div>
+      </div>
 
     </div>
     <div role="tabpanel" class="tab-pane" id="profile">
       <!-- <button ng-click="vm.getActiveContacts()">Refresh</button> -->
-      <h4>Activos</h4>
-      <ul>
-        <li ng-repeat="enviada in vm.contacts.active">{{enviada}}</li>
-      </ul>
+
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default" ng-repeat="enviada in vm.contacts.active">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                {{enviada._usuarioRecibe.nombre}} {{enviada._usuarioRecibe.apellidos}}
+              </a>
+              <i class="pull-right">enviado en: {{enviada._usuarioRecibe.creado}}</i>
+            </h4>
+          </div>
+          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+
+              <div class="col-lg-6">
+                <span>{{enviada._usuarioRecibe.nombre}} {{enviada._usuarioRecibe.apellidos}}</span>
+                <br>
+                <span>{{enviada._usuarioRecibe.correo}}</span>
+                <br>
+                <p>{{enviada._usuarioRecibe.descripcion}}</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
     </div>
     <div role="tabpanel" class="tab-pane" id="messages">
 
@@ -63,15 +101,32 @@
     <div role="tabpanel" class="tab-pane" id="settings">
 
       <h4>Recibidas</h4>
-      <ul>
-        <li ng-repeat="request in vm.contacts.pendingToAnswer">{{request}}
-          <div>
-            <p>
-                <a class="btn btn-link" ng-click="vm.accept(request)">aceptar</a> | <a class="btn btn-link" ng-click="vm.reject(request)">rechazar</a>
-            </p>
+      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+        <div class="panel panel-default" ng-repeat="enviada in vm.contacts.pendingToAnswer">
+          <div class="panel-heading" role="tab" id="headingOne">
+            <h4 class="panel-title">
+              <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                {{enviada._usuarioRecibe.nombre}} {{enviada._usuarioRecibe.apellidos}}
+              </a>
+              <i class="pull-right">enviado en: {{enviada._usuarioRecibe.creado}}</i>
+            </h4>
           </div>
-        </li>
-      </ul>
+          <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+            <div class="panel-body">
+
+              <div class="col-lg-6">
+                <span>{{enviada._usuarioRecibe.nombre}} {{enviada._usuarioRecibe.apellidos}}</span>
+                <br>
+                <span>{{enviada._usuarioRecibe.correo}}</span>
+                <br>
+                <p>{{enviada._usuarioRecibe.descripcion}}</p>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+  
 
       <div class="alert alert-{{vm.putResult.status}}" role="alert">{{vm.putResult.message}}</div>
     </div>
@@ -81,6 +136,10 @@
 
 <script>
   $(document).ready(function () {
+    $('#accordion').collapse();
+    $('#accordion a').click(function (e) {
+      e.preventDefault()
+    });
     $('#myTabs a').click(function (e) {
       e.preventDefault()
       $(this).tab('show')
