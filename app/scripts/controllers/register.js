@@ -18,7 +18,7 @@ angular.module('ijobApp')
 
     var handleSuccess = function (response)  {      
       console.log('ok =>', response);
-      if (response && response.data.estado === "2") {               
+      if (response && response.data.token) {               
         vm.msg.className = 'text-success';
         vm.msg.content = response.data.mensaje;
         vm.token = response.data.token;

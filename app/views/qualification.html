@@ -1,0 +1,271 @@
+<h3>
+
+  Calificaciones</h3>
+<!-- Nav tabs -->
+<ul class="nav nav-tabs" role="tablist" id="myTabs">
+  <li role="presentation" class="active">
+    <a href="#home" aria-controls="home" role="tab" data-toggle="tab">Calificaciones realizadas ({{vm.qualifications.done.length}})</a>
+  </li>
+  <li role="presentation">
+    <a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Calificaciones recibidas ({{vm.qualifications.received.length}})</a>
+  </li>
+
+  <li role="presentation">
+    <a href="#settings" aria-controls="settings" role="tab" data-toggle="tab">Calificaciones pendientes ({{vm.qualifications.pending.length}})</a>
+  </li>
+
+</ul>
+<!-- Tab panes -->
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane active" id="home">
+    <br>
+    <!-- <button ng-click="vm.getPendingContacts(1)">Enviadas</button>
+      <button ng-click="vm.getPendingContacts(2)">Recibidas</button> -->
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      {{vm.doneMessage}}
+      <div class="panel panel-default" ng-repeat="enviada in vm.qualifications.done">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a role="button" ng-if="enviada._usuarioRecibe" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+              aria-controls="collapseOne">
+              {{enviada._usuarioRecibe.nombre}} {{enviada._usuarioRecibe.apellidos}}
+            </a>
+            <span ng-if="!enviada._usuarioRecibe" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true"
+              aria-controls="collapseOne">
+              Nombre de usuario desconocido
+            </span>
+            <i class="pull-right">enviado en: {{enviada.fecha}}</i>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+            <div class="col-lg-12" ng-if="enviada.tipoCalificacion === 2">
+              <dl class="dl-horizontal">
+                <dt>Respeto</dt>
+                <dd>{{enviada.respeto}}</dd>
+                <dt>Puntualidad</dt>
+                <dd>{{enviada.puntualidad}}</dd>
+                <dt>Orientacion</dt>
+                <dd>{{enviada.orientacion}}</dd>
+              </dl>
+
+            </div>
+
+            <div class="col-lg-12" ng-if="enviada.tipoCalificacion === 1">
+              <dl class="dl-horizontal">
+                <dt>Respeto</dt>
+                <dd>{{enviada.respeto}}</dd>
+                <dt>Puntualidad</dt>
+                <dd>{{enviada.puntualidad}}</dd>
+                <dt>Calidad</dt>
+                <dd>{{enviada.calidad}}</dd>
+              </dl>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="profile">
+    <!-- <button ng-click="vm.getActiveContacts()">Refresh</button> -->
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      {{vm.receivedMessage}}
+      <div class="panel panel-default" ng-repeat="enviada in vm.qualifications.received">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              {{enviada._usuarioOtorga.nombre}} {{enviada._usuarioOtorga.apellidos}}
+            </a>
+            <i class="pull-right">enviado en: {{enviada._usuarioOtorga.creado}}</i>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+
+            <div class="col-lg-6">
+              <span>{{enviada._usuarioOtorga.nombre}} {{enviada._usuarioOtorga.apellidos}}</span>
+              <br>
+              <span>{{enviada._usuarioOtorga.correo}}</span>
+              <br>
+              <p>{{enviada._usuarioOtorga.descripcion}}</p>
+            </div>
+
+            <div class="col-lg-12" ng-if="enviada.tipoCalificacion === 2">
+              <dl class="dl-horizontal">
+                <dt>Respeto</dt>
+                <dd>{{enviada.respeto}}</dd>
+                <dt>Puntualidad</dt>
+                <dd>{{enviada.puntualidad}}</dd>
+                <dt>Orientacion</dt>
+                <dd>{{enviada.orientacion}}</dd>
+              </dl>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div role="tabpanel" class="tab-pane" id="settings">
+
+    {{vm.pendingMessage}}
+    <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+      <div class="panel panel-default" ng-repeat="enviada in vm.qualifications.pending">
+        <div class="panel-heading" role="tab" id="headingOne">
+          <h4 class="panel-title">
+            <a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+              {{enviada._usuarioRecibe.nombre}} {{enviada._usuarioRecibe.apellidos}}
+            </a>
+            <i class="pull-right">enviado en: {{enviada._usuarioRecibe.creado}}</i>
+          </h4>
+        </div>
+        <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+          <div class="panel-body">
+
+            <div class="col-lg-6">
+              <span>{{enviada._usuarioRecibe.nombre}} {{enviada._usuarioRecibe.apellidos}}</span>
+              <br>
+              <span>{{enviada._usuarioRecibe.correo}}</span>
+              <br>
+              <p>{{enviada._usuarioRecibe.descripcion}}</p>
+            </div>
+
+            <div class="col-lg-12" ng-if="enviada.tipoCalificacion === 2">
+              <div class="well">
+                <div>
+                  <fieldset>Respeto </fieldset>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.respect" id="inlineRadio1" value="1"> 1
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.respect" id="inlineRadio2" value="2"> 2
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.respect" id="inlineRadio3" value="3"> 3
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.respect" id="inlineRadio3" value="4"> 4
+                  </label>
+                </div>
+                <hr>
+                <div>
+                  <fieldset>Puntualidad </fieldset>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.punctuality" id="inlineRadio1" value="1"> 1
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.punctuality" id="inlineRadio2" value="2"> 2
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.punctuality" id="inlineRadio3" value="3"> 3
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.punctuality" id="inlineRadio3" value="4"> 4
+                  </label>
+                </div>
+                <hr>
+                <div>
+                  <fieldset>Orientación </fieldset>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.orientation" id="inlineRadio1" value="1"> 1
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.orientation" id="inlineRadio2" value="2"> 2
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.orientation" id="inlineRadio3" value="3"> 3
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.orientation" id="inlineRadio3" value="4"> 4
+                  </label>
+                </div>
+              </div>
+              <button class="btn btn-info" ng-click="vm.qualify(enviada._id)">Calificar</button>
+              <span>{{vm.qualify.message}}</span>
+            </div>
+
+            <div class="col-lg-12" ng-if="enviada.tipoCalificacion === 1">
+              <div class="well">
+                <div>
+                  <fieldset>Respeto </fieldset>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.respect" id="inlineRadio1" value="1"> 1
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.respect" id="inlineRadio2" value="2"> 2
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.respect" id="inlineRadio3" value="3"> 3
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.respect" id="inlineRadio3" value="4"> 4
+                  </label>
+                </div>
+                <hr>
+                <div>
+                  <fieldset>Puntualidad </fieldset>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.punctuality" id="inlineRadio1" value="1"> 1
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.punctuality" id="inlineRadio2" value="2"> 2
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.punctuality" id="inlineRadio3" value="3"> 3
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.punctuality" id="inlineRadio3" value="4"> 4
+                  </label>
+                </div>
+                <hr>
+                <div>
+                  <fieldset>Calidad </fieldset>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.quality" id="inlineRadio1" value="1"> 1
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.quality" id="inlineRadio2" value="2"> 2
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.quality" id="inlineRadio3" value="3"> 3
+                  </label>
+                  <label class="radio-inline">
+                    <input type="radio" ng-model="vm.quality" id="inlineRadio3" value="4"> 4
+                  </label>
+                </div>
+              </div>
+              <button class="btn btn-info" ng-click="vm.qualify(enviada)">Calificar</button>
+              <span>{{vm.qualify.message}}</span>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="alert alert-{{vm.putResult.status}}" role="alert">{{vm.putResult.message}}</div>
+  </div>
+</div>
+
+</div>
+
+<script>
+  $(document).ready(function () {
+    $('#accordion').collapse();
+    $('#accordion a').click(function (e) {
+      e.preventDefault()
+    });
+    $('#myTabs a').click(function (e) {
+      e.preventDefault()
+      $(this).tab('show')
+    })
+  });
+
+</script>

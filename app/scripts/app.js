@@ -58,6 +58,11 @@ angular
         controller: 'ContactsCtrl',
         controllerAs: 'vm'
       })
+      .when('/qualification', {
+        templateUrl: 'views/qualification.html',
+        controller: 'QualificationCtrl',
+        controllerAs: 'vm'
+      })
       .otherwise({
         redirectTo: '/'
       });
