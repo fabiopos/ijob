@@ -33,7 +33,7 @@ angular.module('ijobApp')
         console.log('response =>', response);
         
         mapResult(response);
-      })
+      });
     };
     vm.changePage = function(page){
       vm.currentPage = page;
@@ -222,7 +222,7 @@ angular.module('ijobApp')
       }, 
         function(response){ console.log('response '. response );
       });
-    }
+    };
     vm.geoSearch =  getGeoSearch;
     getUbicaciones();
     getEscolaridad();
