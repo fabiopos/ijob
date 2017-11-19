@@ -32,7 +32,7 @@
     </div>
   </div>
   <hr>
-  <div id="map"></div>
+  
 </div>
 <form class="form" role="form" ng-submit="vm.advancedSearch()" ng-if="vm.advanced">
   <div>
@@ -270,6 +270,12 @@
     <hr>
   </div>
 </div>
+
+<button ng-click="vm.VisibleMap = !vm.VisibleMap">
+  <span ng-if="!vm.VisibleMap">show map</span>
+  <span ng-if="vm.VisibleMap">hide map</span>
+</button>
+<div id="map" ng-if="vm.VisibleMap"></div>
 <nav aria-label="Page navigation" ng-if="vm.jobs.length > 0">
     <ul class="pagination">
       <li>

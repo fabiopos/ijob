@@ -13,6 +13,7 @@ angular.module('ijobApp')
       vm.msg.className = '';
       vm.dataLoading = true;
       vm.user.clave = CryptoService.SHA1.encode(vm.user.clave).toString();
+      vm.user.metodoRegistro = 4;
       UserService.Create(vm.user).then( function (response) {handleSuccess(response);}, function(response) { handleError(response); });
     };
 

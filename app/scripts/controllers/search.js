@@ -195,7 +195,8 @@ angular.module('ijobApp')
       initMap(position);
     };
     vm.searchGeografica = function(){
-        vm.geografica = true;
+        vm.geografica = !vm.geografica;
+        vm.advanced = false;
         getLocation();       
     };
 
