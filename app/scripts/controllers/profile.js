@@ -157,6 +157,7 @@ angular.module('ijobApp').controller('ProfileCtrl', function ($location, Profile
 
   var handleGetSuccess = function (response) {
     console.log('user =>', response.data);
+    if(response.data._imagen)  vm.defaultImage = UserService.GetUserImage(response.data._imagen);
     vm.dataLoading = false;
     vm.user = response.data;
     vm.user.nacimiento = moment(response.data.nacimiento).toDate();
